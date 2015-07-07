@@ -33,7 +33,7 @@
 	else
 	{
 		$status = "fail";
-		$error = mysql_error($con);
+		$error = mysqli_error($con);
 	}
 
 	echo json_encode(array("status" => $status, "user_id" => $user_id, "error"=> $error));
