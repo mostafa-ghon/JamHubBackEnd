@@ -20,6 +20,7 @@
 	$con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
 	$sql = "SELECT * FROM `users` WHERE `user_name` LIKE '$user_name'";
 
+	$user = NULL;
 	$result = mysqli_query($con, $sql);			//searching for username entered and retrieving if found
 	if (mysqli_num_rows($result) > 0){
 		$row = mysqli_fetch_assoc($result);
@@ -32,7 +33,7 @@
 	}
 
  	if($password == $user["password"]){					//validating password
- 		echo json_encode(array("status" => "success"));
+ 		echo json_encode(array("status" => "success", "user" => $user));
  	}
  	else{
  		echo json_encode(array("status" => "fail", "error" => "wrong password!"));

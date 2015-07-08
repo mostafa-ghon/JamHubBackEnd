@@ -28,14 +28,14 @@
 
 	$con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
 	if($band){
-		$sql = "INSERT INTO `tracks`(`track_name`, `band_id`, `duration`, `upload_date`, `instrument`, `tags`, `img_url`
-					, `track_url`) VALUES ('$name', $band_id, $duration, '$upload_date', '$instrument'
-						, '$tags', '$img_url', '$track_url')";
+		$sql = "INSERT INTO `tracks`(`track_name`, `band_id`, `duration`, `upload_date`, `instrument`,
+			`tags`, `img_url` , `track_url`) VALUES ('$name', $band_id, $duration, '$upload_date',
+			'$instrument', '$tags', '$img_url', '$track_url')";
 	}
 	else{
-		$sql = "INSERT INTO `tracks`(`track_name`, `user_id`, `duration`, `upload_date`, `instrument`, `tags`, `img_url`
-					, `track_url`) VALUES ('$name', $user_id, $duration, '$upload_date', '$instrument'
-						, '$tags', '$img_url', '$track_url')";
+		$sql = "INSERT INTO `tracks`(`track_name`, `user_id`, `duration`, `upload_date`, `instrument`,
+			`tags`, `img_url` , `track_url`) VALUES ('$name', $user_id, $duration, '$upload_date',
+			'$instrument', '$tags', '$img_url', '$track_url')";
 	}
 
 	$track_id=0;
