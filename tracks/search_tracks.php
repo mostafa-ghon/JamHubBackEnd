@@ -5,8 +5,13 @@
 		die(json_encode(array("error" => "Only GET requests are allowed.")));
 	}
 
+	if(!isset($_GET["name"]) || empty(trim($_GET["name"])) )
+		die(json_encode(array("error" => "Missing request paramters.")));
+
+	$name = trim($_GET["name"]);
+
+	$sql = "SELECT * FROM `tracks` WHERE `track_name` LIKE '%$name%'";
 	$con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
-	$sql = "SELECT * FROM `tracks` ORDER BY `likes` DESC limit 4";
 
 	$result = mysqli_query($con, $sql);
 	$results_array = array();
@@ -20,9 +25,8 @@
 				, "likes" => $row["likes"], "rating" => $row["rating"], "tags" => $row["tags"]
 				, "img_url" => $row["img_url"], "track_url" => $row["track_url"]);
 		}
-	}else{
-	 	die(json_encode(array("status" => "fail", "results" => array())));
-	}
+	}else
+ 		die(json_encode(array("status" => "fail", "results" => array())));
 
 	echo json_encode(array("status" => "success", "results" => $results_array));
 
