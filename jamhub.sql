@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2015 at 03:20 PM
+-- Generation Time: Jul 12, 2015 at 01:56 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -32,9 +32,8 @@ DROP TABLE IF EXISTS `tracks`;
 CREATE TABLE IF NOT EXISTS `tracks` (
 `track_id` int(11) NOT NULL,
   `track_name` varchar(35) NOT NULL,
-  `band` tinyint(1) DEFAULT '0',
-  `user_id` int(11) DEFAULT NULL,
-  `band_id` int(11) DEFAULT NULL,
+  `user_name` varchar(18) DEFAULT NULL,
+  `band_name` varchar(18) DEFAULT NULL,
   `duration` int(11) NOT NULL,
   `ancestor_id` int(11) DEFAULT NULL,
   `upload_date` date NOT NULL,
@@ -44,18 +43,7 @@ CREATE TABLE IF NOT EXISTS `tracks` (
   `tags` text NOT NULL,
   `img_url` text NOT NULL,
   `track_url` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tracks`
---
-
-INSERT INTO `tracks` (`track_id`, `track_name`, `band`, `user_id`, `band_id`, `duration`, `ancestor_id`, `upload_date`, `instrument`, `likes`, `rating`, `tags`, `img_url`, `track_url`) VALUES
-(1, 'track', 0, 3, NULL, 24, NULL, '0000-00-00', 'guitar', 10, 0, 'fun test', 'http:/ahourl', 'http:/wahokamanwa7ed'),
-(2, 'solotest2', 0, 3, NULL, 24, NULL, '0000-00-00', 'shit', 3, 0, 'lala', 'http:/ahourl', 'http:/wahokamanwa7ed'),
-(3, 'bandtrack', 0, NULL, 4, 24, NULL, '0000-00-00', '', 9, 0, '', 'http:/ahourl', 'http:/wahokamanwa7ed'),
-(4, 'ticktrack', 0, 3, NULL, 24, NULL, '0000-00-00', '', 20, 0, '', 'http:/ahourl', 'http:/wahokamanwa7ed'),
-(5, 'testupload', 0, 3, NULL, 24, NULL, '0000-00-00', 'testinst', 15, 0, 'upload', 'http:/ahourl', 'http:/wahokamanwa7ed');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -65,19 +53,13 @@ INSERT INTO `tracks` (`track_id`, `track_name`, `band`, `user_id`, `band_id`, `d
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-`user_id` int(11) NOT NULL,
   `user_name` varchar(18) NOT NULL,
   `password` text NOT NULL,
   `first_name` text,
-  `last_name` text
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `user_name`, `password`, `first_name`, `last_name`) VALUES
-(1, '', '', '', '');
+  `last_name` text,
+  `email` text NOT NULL,
+  `img_url` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -87,13 +69,13 @@ INSERT INTO `users` (`user_id`, `user_name`, `password`, `first_name`, `last_nam
 -- Indexes for table `tracks`
 --
 ALTER TABLE `tracks`
- ADD PRIMARY KEY (`track_id`);
+ ADD PRIMARY KEY (`track_id`), ADD KEY `user_name` (`user_name`,`band_name`), ADD KEY `band_name` (`band_name`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`user_id`), ADD UNIQUE KEY `user_name` (`user_name`);
+ ADD PRIMARY KEY (`user_name`), ADD UNIQUE KEY `user_name` (`user_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -103,12 +85,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tracks`
 --
 ALTER TABLE `tracks`
-MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `users`
+-- Constraints for dumped tables
 --
-ALTER TABLE `users`
-MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+
+--
+-- Constraints for table `tracks`
+--
+ALTER TABLE `tracks`
+ADD CONSTRAINT `tracks_ibfk_1` FOREIGN KEY (`user_name`) REFERENCES `users` (`user_name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

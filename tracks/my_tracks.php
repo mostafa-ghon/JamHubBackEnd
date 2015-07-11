@@ -5,12 +5,12 @@
 		die(json_encode(array("error" => "Only GET requests are allowed.")));
 	}
 
-	if(!isset($_GET["uid"]) || empty(trim($_GET["uid"])) )
+	if(!isset($_GET["uname"]) || empty(trim($_GET["uname"])) )
 		die(json_encode(array("error" => "Missing request paramters.")));
 
-	$uid = trim($_GET["uid"]);
+	$uname = trim($_GET["uname"]);
 
-	$sql = "SELECT COUNT(*) FROM `tracks` WHERE `user_id` = $uid";
+	$sql = "SELECT COUNT(*) FROM `tracks` WHERE `user_name` = '$uname'";
 	$con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
 
 	$result = mysqli_query($con, $sql);

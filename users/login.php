@@ -24,9 +24,9 @@
 	$result = mysqli_query($con, $sql);			//searching for username entered and retrieving if found
 	if (mysqli_num_rows($result) > 0){
 		$row = mysqli_fetch_assoc($result);
-		$user = array("user_id" => $row["user_id"], "user_name" => $row["user_name"]
-			, "password" => $row["password"], "first_name" => $row["first_name"]
-			, "last_name" => $row["last_name"]);
+		$user = array("user_name" => $row["user_name"], "password" => $row["password"]
+			, "first_name" => $row["first_name"], "last_name" => $row["last_name"], "email" => $row["email"]
+			, "img_url" => $row["img_url"]);
 	}
 	else{
  		die(json_encode(array("status" => "fail", "error" => "wrong username!")));

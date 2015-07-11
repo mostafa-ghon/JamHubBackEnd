@@ -15,9 +15,8 @@
 		die(json_encode(array("error" => "Invalid JSON object.")));
 
 	$name = $track->name;
-	$band = $track->band;
-	$user_id = $track->user_id;
-	$band_id = $track->band_id;
+	$user = $track->user_name;
+	$band = $track->band_name;
 	$duration = $track->duration;
 	//$ancestor_id = $track->ancestor_id;
 	$upload_date = $track->upload_date;
@@ -27,14 +26,14 @@
 	$track_url = $track->track_url;
 
 	$con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
-	if($band){
-		$sql = "INSERT INTO `tracks`(`track_name`, `band_id`, `duration`, `upload_date`, `instrument`,
-			`tags`, `img_url` , `track_url`) VALUES ('$name', $band_id, $duration, '$upload_date',
+	if($user == NULL){
+		$sql = "INSERT INTO `tracks`(`track_name`, `band_name`, `duration`, `upload_date`, `instrument`,
+			`tags`, `img_url` , `track_url`) VALUES ('$name', '$band', $duration, '$upload_date',
 			'$instrument', '$tags', '$img_url', '$track_url')";
 	}
 	else{
-		$sql = "INSERT INTO `tracks`(`track_name`, `user_id`, `duration`, `upload_date`, `instrument`,
-			`tags`, `img_url` , `track_url`) VALUES ('$name', $user_id, $duration, '$upload_date',
+		$sql = "INSERT INTO `tracks`(`track_name`, `user_name`, `duration`, `upload_date`, `instrument`,
+			`tags`, `img_url` , `track_url`) VALUES ('$name', '$user', $duration, '$upload_date',
 			'$instrument', '$tags', '$img_url', '$track_url')";
 	}
 
