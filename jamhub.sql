@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2015 at 01:56 AM
+-- Generation Time: Jul 13, 2015 at 07:46 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `tracks` (
   `track_name` varchar(35) NOT NULL,
   `user_name` varchar(18) DEFAULT NULL,
   `band_name` varchar(18) DEFAULT NULL,
-  `duration` int(11) NOT NULL,
-  `ancestor_id` int(11) DEFAULT NULL,
-  `upload_date` date NOT NULL,
+  `duration` int(11) NOT NULL DEFAULT '0',
+  `ancestor_id` int(11) DEFAULT '0',
+  `upload_date` date DEFAULT NULL,
   `instrument` varchar(20) NOT NULL,
   `likes` int(11) DEFAULT '0',
   `rating` double DEFAULT '0',
