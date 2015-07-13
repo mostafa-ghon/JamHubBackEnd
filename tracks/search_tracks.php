@@ -10,7 +10,8 @@ if(!isset($_GET["name"]) || empty(trim($_GET["name"])) )
 
 $name = trim($_GET["name"]);
 
-$sql = "SELECT * FROM `tracks` WHERE `track_name` LIKE '%$name%'";
+$sql = "SELECT * FROM `tracks` WHERE `track_name` LIKE '%$name%' OR `instrument` LIKE '%$name%'
+			OR `tags` LIKE '%$name%' OR `user_name` LIKE '%$name%'";
 $con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
 
 $result = mysqli_query($con, $sql);
