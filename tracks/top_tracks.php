@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] !== 'GET'){ 	//Validating request method.
 }
 
 $con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
-$sql = "SELECT * FROM `tracks` ORDER BY `likes` DESC limit 4";
+$sql = "SELECT * FROM `tracks` ORDER BY `likes` DESC limit 10";
 
 $result = mysqli_query($con, $sql);
 $results_array = array();
