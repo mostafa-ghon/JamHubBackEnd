@@ -23,12 +23,17 @@ $img_url = $user->img_url;
 
 $con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
 if($password==NULL){
-	$sql = "UPDATE `users` SET `first_name` = '$first_name', `last_name` = '$last_name'
-			, `email` = '$email', `img_url` = 'img_url' WHERE `user_name` = '$user_name'";
+	if($img_url==""){
+		$sql = "UPDATE `users` SET `first_name` = '$first_name', `last_name` = '$last_name'
+				, `email` = '$email' WHERE `user_name` = '$user_name'";
+	}else{
+		$sql = "UPDATE `users` SET `first_name` = '$first_name', `last_name` = '$last_name'
+				, `email` = '$email', `img_url` = '$img_url' WHERE `user_name` = '$user_name'";
+	}
 }
 else{
 	$sql = "UPDATE `users` SET `password` = '$password', `first_name` = '$first_name'
-			, `last_name` = '$last_name', `email` = '$email', `img_url` = 'img_url' 
+			, `last_name` = '$last_name', `email` = '$email', `img_url` = '$img_url' 
 			WHERE `user_name` = '$user_name'";
 }
 
@@ -42,7 +47,15 @@ else{
 	$error = mysqli_error($con);
 }
 
-echo json_encode(array("status" => $status, "error"=> $error));
+$sql = "SELECT `img_url` FROM `users` WHERE `user_name` = '$user_name'";
+$result = mysqli_query($con, $sql);
+$url="";
+if (mysqli_num_rows($result) > 0) {
+	$row = mysqli_fetch_assoc($result);
+	$url = $row["img_url"];
+}
+
+echo json_encode(array("status" => $status, "error" => $error, "url" => $url));
 
 mysqli_close($con);
 ?>
