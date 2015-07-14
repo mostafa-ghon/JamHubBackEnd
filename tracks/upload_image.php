@@ -18,7 +18,7 @@ if ($_FILES["image"]["size"] > 500000)
     die(json_encode(array("status" => "fail", "error" => "Image is too large.")));
 
 if($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg" && $file_type != "gif" ) 
-    die(json_encode(array("status" => "fail", "error" => "Unsupported file extension $file_typ.")));
+    die(json_encode(array("status" => "fail", "error" => "Unsupported file extension $file_type.")));
 
 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 	echo json_encode(array("status" => "success", "url" => $target_file));

@@ -41,8 +41,24 @@ $track_id=0;
 $status="";
 $error="";
 if(mysqli_query($con, $sql)){
-	$status = "success";
-	$user_id = mysqli_insert_id($con);
+	$sql = "UPDATE `users` SET `num_of_tracks` = 
+			(SELECT COUNT(*) FROM `tracks` WHERE tracks.user_name = users.user_name AND 'ancestor_id' = 0)";
+	if(mysqli_query($con, $sql)){
+		$sql = "UPDATE `users` SET `num_of_jams` = 
+			(SELECT COUNT(*) FROM `tracks` WHERE tracks.user_name = users.user_name AND 'ancestor_id' > 0)";
+		if(mysqli_query($con, $sql)){
+			$status = "success";
+			$user_id = mysqli_insert_id($con);
+		}
+		else{
+			$status = "Ufail";
+			$error = mysqli_error($con);
+		}
+	}
+	else{
+		$status = "Ufail";
+		$error = mysqli_error($con);
+	}
 }
 else
 {
