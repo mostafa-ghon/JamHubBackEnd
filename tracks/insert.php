@@ -18,7 +18,7 @@ $name = $track->name;
 $user = $track->user_name;
 $band = $track->band_name;
 $duration = $track->duration;
-//$ancestor_id = $track->ancestor_id;
+$ancestor_id = $track->ancestor_id;
 $upload_date = $track->upload_date;
 $instrument = $track->instrument;
 $tags = $track->tags;
@@ -27,14 +27,14 @@ $track_url = $track->track_url;
 
 $con = mysqli_connect("127.0.0.1","Test_user","","jamhub");
 if($user == NULL){
-	$sql = "INSERT INTO `tracks`(`track_name`, `band_name`, `duration`, `upload_date`, `instrument`,
-		`tags`, `img_url` , `track_url`) VALUES ('$name', '$band', $duration, '$upload_date',
-		'$instrument', '$tags', '$img_url', '$track_url')";
+	$sql = "INSERT INTO `tracks`(`track_name`, `band_name`, `duration`, `ancestor_id`, `upload_date`,
+		`instrument`, `tags`, `img_url` , `track_url`) VALUES ('$name', '$band', $duration,
+		$ancestor_id, $upload_date', '$instrument', '$tags', '$img_url', '$track_url')";
 }
 else{
-	$sql = "INSERT INTO `tracks`(`track_name`, `user_name`, `duration`, `upload_date`, `instrument`,
-		`tags`, `img_url` , `track_url`) VALUES ('$name', '$user', $duration, '$upload_date',
-		'$instrument', '$tags', '$img_url', '$track_url')";
+	$sql = "INSERT INTO `tracks`(`track_name`, `user_name`, `duration`, `ancestor_id`, `upload_date`,
+		`instrument`, `tags`, `img_url` , `track_url`) VALUES ('$name', '$user', $duration,
+		$ancestor_id, '$upload_date', '$instrument', '$tags', '$img_url', '$track_url')";
 }
 
 $track_id=0;
